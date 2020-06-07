@@ -1,5 +1,6 @@
 {
-  "dependencies": {
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
     "@types/node": "^14.0.11"
   }
 }
