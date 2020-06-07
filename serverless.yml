@@ -1,16 +1,3 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
-
 service: catrl
 app: catrl-app
 org: mk7pe
@@ -39,35 +26,3 @@ functions:
       - http:
           path: hello
           method: post
-
-resources:
-  Resources:
-    CatRLTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: catrl
-            AttributeType: S
-        KeySchema:
-          - AttributeName: catrl
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
-
-custom:
-  capacities:
-    - table: CatRLTable # DynamoDB Resource
-      read:
-        minimum: 5 # Minimum read capacity
-        maximum: 1000 # Maximum read capacity
-        usage: 0.75 # Targeted usage percentage
-      write:
-        minimum: 40 # Minimum write capacity
-        maximum: 200 # Maximum write capacity
-        usage: 0.5 # Targeted usage percentage
-
-plugins:
-  - serverless-dynamodb-autoscaling

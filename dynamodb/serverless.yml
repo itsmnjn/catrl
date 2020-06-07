@@ -1,0 +1,42 @@
+service: catrl-dynamodb
+app: catrl-app
+org: mk7pe
+frameworkVersion: '=1.72.0'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+
+resources:
+  Resources:
+    CatRLTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: catrl
+            AttributeType: S
+        KeySchema:
+          - AttributeName: catrl
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+custom:
+  capacities:
+    - table: CatRLTable # DynamoDB Resource
+      read:
+        minimum: 5 # Minimum read capacity
+        maximum: 1000 # Maximum read capacity
+        usage: 0.75 # Targeted usage percentage
+      write:
+        minimum: 40 # Minimum write capacity
+        maximum: 200 # Maximum write capacity
+        usage: 0.5 # Targeted usage percentage
+
+plugins:
+  - serverless-dynamodb-autoscaling
