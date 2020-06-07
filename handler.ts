@@ -49,9 +49,13 @@ export const newCatrl = async (event) => {
     response.statusCode = 500;
     response.body = JSON.stringify({ error: 'Invalid URL passed' });
   }
+
+  let catrl: string = generateCatrl();
+
+  const getParams = {
     TableName: process.env.DYNAMODB_TABLE,
-    Item: {
-      catrl: 'test',
+    Key: {
+      catrl,
     },
   };
 
