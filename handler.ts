@@ -13,6 +13,14 @@ const randStringFromList = (list: string[]): string => {
 
   return randString;
 };
+const generateCatrl = (): string => {
+  const firstAdj = randStringFromList(adjectives);
+  const secondAdj = randStringFromList(adjectives);
+  const feline = randStringFromList(felines);
+  const catrl = `${firstAdj}${secondAdj}${feline}`;
+
+  return catrl;
+};
 export const newCatrl = async (event) => {
   let response = {
     statusCode: 0,
