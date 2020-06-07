@@ -1,11 +1,5 @@
 {
-  "name": "catrl",
-  "version": "1.0.0",
-  "main": "handler.js",
-  "repository": "https://github.com/itsmnjn/catrl.git",
-  "author": "Min Jun Kim <mk7pe@virginia.edu>",
-  "license": "MIT",
   "dependencies": {
-    "serverless-dynamodb-autoscaling": "^0.6.2"
+    "@types/node": "^14.0.11"
   }
 }
