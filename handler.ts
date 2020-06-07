@@ -13,6 +13,7 @@ const randStringFromList = (list: string[]): string => {
 
   return randString;
 };
+
 const generateCatrl = (): string => {
   const firstAdj = randStringFromList(adjectives);
   const secondAdj = randStringFromList(adjectives);
@@ -21,6 +22,11 @@ const generateCatrl = (): string => {
 
   return catrl;
 };
+
+const isObjEmpty = (obj: object): boolean => {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+};
+
 export const newCatrl = async (event) => {
   let response = {
     statusCode: 0,
