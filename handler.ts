@@ -98,5 +98,14 @@ export const getURL = async (event) => {
 
   response.statusCode = 200;
   response.body = JSON.stringify(event.pathParameters.catrl);
+  if (
+    !event.queryStringParameters ||
+    !event.queryStringParameters.catrl ||
+    event.queryStringParameters.catrl === ''
+  ) {
+    response.statusCode = 500;
+    response.body = JSON.stringify({ error: 'No catrl passed.' });
+    return response;
+  }
   return response;
 };
