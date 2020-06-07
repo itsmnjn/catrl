@@ -26,6 +26,10 @@ functions:
           path: new
           method: get
           cors: true
+          request:
+            parameters:
+              querystrings:
+                url: true
   getURL:
     handler: handler.getURL
     events:
