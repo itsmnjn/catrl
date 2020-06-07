@@ -29,3 +29,14 @@ export const hello = async (event) => {
 
   return response;
 };
+
+export const getURL = async (event) => {
+  let response = {
+    statusCode: 0,
+    body: '',
+  };
+
+  response.statusCode = 200;
+  response.body = JSON.stringify(event.pathParameters.catrl);
+  return response;
+};

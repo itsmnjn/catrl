@@ -1,5 +1,4 @@
 service: catrl
-app: catrl-app
 org: mk7pe
 frameworkVersion: '=1.72.0'
 
@@ -20,9 +19,21 @@ provider:
       Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}'
 
 functions:
-  hello:
-    handler: handler.hello
+  newCatrl:
+    handler: handler.newCatrl
     events:
       - http:
-          path: hello
-          method: post
+          path: new
+          method: get
+          cors: true
+  getURL:
+    handler: handler.getURL
+    events:
+      - http:
+          path: transform/{catrl}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                catrl: true
