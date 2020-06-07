@@ -1,6 +1,8 @@
 ('use strict');
 
 import { DynamoDB } from 'aws-sdk';
+import adjectives from './adjectives';
+import felines from './felines';
 
 const dynamoDB = new DynamoDB.DocumentClient();
 
