@@ -48,6 +48,7 @@ export const newCatrl = async (event) => {
   if (!urlRegExp.test(event.queryStringParameters.url)) {
     response.statusCode = 500;
     response.body = JSON.stringify({ error: 'Invalid URL passed' });
+    return response;
   }
 
   let catrl: string = generateCatrl();
