@@ -6,6 +6,13 @@ import felines from './felines';
 
 const dynamoDB = new DynamoDB.DocumentClient();
 
+const randStringFromList = (list: string[]): string => {
+  const len = list.length;
+  const randIndex = Math.floor(Math.random() * len);
+  const randString = list[randIndex];
+
+  return randString;
+};
 export const newCatrl = async (event) => {
   let response = {
     statusCode: 0,
