@@ -60,12 +60,30 @@ export const newCatrl = async (event) => {
   };
 
   try {
-    const result = await dynamoDB.put(params).promise();
+    let result = (await dynamoDB.get(getParams).promise()) as any;
+
+    while (!isObjEmpty(result)) {
+      catrl = generateCatrl();
+      getParams.Key.catrl = catrl;
+      result = (await dynamoDB.get(getParams).promise()) as any;
+    }
+
+    const putParams = {
+      TableName: process.env.DYNAMODB_TABLE,
+      Item: {
+        catrl,
+        url: event.queryStringParameters.url,
+      },
+    };
+
+    await dynamoDB.put(putParams).promise();
+
     response.statusCode = 200;
-    response.body = JSON.stringify(result);
+    response.body = JSON.stringify({ result: putParams.Item.catrl });
   } catch (error) {
     response.statusCode = 500;
-    response.body = JSON.stringify(error);
+    response.body = JSON.stringify({ error });
+
     console.error(error);
   }
 
