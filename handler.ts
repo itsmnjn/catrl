@@ -1,15 +1,31 @@
 ('use strict');
 
-module.exports.hello = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
+import { DynamoDB } from 'aws-sdk';
+
+const dynamoDB = new DynamoDB.DocumentClient();
+
+export const hello = async (event) => {
+  let response = {
+    statusCode: 0,
+    data: '',
   };
+
+  const params = {
+    TableName: process.env.DYNAMODB_TABLE,
+    Item: {
+      catrl: 'test',
+    },
+  };
+
+  try {
+    const result = await dynamoDB.put(params).promise();
+    response.statusCode = 200;
+    response.data = JSON.stringify(result);
+  } catch (error) {
+    response.statusCode = 500;
+    response.data = JSON.stringify(error);
+    console.error(error);
+  }
+
+  return response;
 };

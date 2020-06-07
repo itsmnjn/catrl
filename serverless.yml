@@ -7,7 +7,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-dynamodb-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
