@@ -3,4 +3,6 @@ if [[ $# -eq 0 ]] ; then
     exit 1
 fi
 
+tsc
 serverless deploy --aws-profile catrl  --stage ${1} -v
+rm -rf *.js
