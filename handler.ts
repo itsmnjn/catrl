@@ -4,10 +4,10 @@ import { DynamoDB } from 'aws-sdk';
 
 const dynamoDB = new DynamoDB.DocumentClient();
 
-export const hello = async (event) => {
+export const newCatrl = async (event) => {
   let response = {
     statusCode: 0,
-    data: '',
+    body: '',
   };
 
   const params = {
@@ -20,10 +20,10 @@ export const hello = async (event) => {
   try {
     const result = await dynamoDB.put(params).promise();
     response.statusCode = 200;
-    response.data = JSON.stringify(result);
+    response.body = JSON.stringify(result);
   } catch (error) {
     response.statusCode = 500;
-    response.data = JSON.stringify(error);
+    response.body = JSON.stringify(error);
     console.error(error);
   }
 
