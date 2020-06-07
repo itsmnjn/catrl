@@ -33,7 +33,15 @@ export const newCatrl = async (event) => {
     body: '',
   };
 
-  const params = {
+  if (
+    !event.queryStringParameters ||
+    !event.queryStringParameters.url ||
+    event.queryStringParameters.url === ''
+  ) {
+    response.statusCode = 500;
+    response.body = JSON.stringify({ error: 'No URL passed.' });
+    return response;
+  }
     TableName: process.env.DYNAMODB_TABLE,
     Item: {
       catrl: 'test',
