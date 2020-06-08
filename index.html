@@ -267,7 +267,7 @@
             } else {
               var maxLen = 18;
               var catrl = result.result;
-              // if (url.length > maxLen) url = url.substring(0, maxLen) + '...';
+              if (url.length > maxLen) url = url.substring(0, maxLen) + '...';
               output.innerHTML =
                 '' +
                 url +
