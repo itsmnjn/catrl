@@ -122,6 +122,10 @@ export const getURL = async (event) => {
       response.body = JSON.stringify({ error: 'URL does not exist.' });
     } else {
       response.statusCode = 200;
+      response.statusCode = 301;
+      response.headers = {
+        Location: result.Item.url,
+      };
       response.body = JSON.stringify({
         result: result.Item.url,
       });
