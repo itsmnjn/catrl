@@ -19,6 +19,13 @@ provider:
       Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}'
 
 functions:
+  getStatic:
+    handler: handler.getStatic
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
   newCatrl:
     handler: handler.newCatrl
     events:
