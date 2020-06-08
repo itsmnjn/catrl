@@ -31,6 +31,9 @@ const isObjEmpty = (obj: object): boolean => {
 export const newCatrl = async (event) => {
   let response = {
     statusCode: 0,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     body: '',
   };
 
@@ -95,6 +98,9 @@ export const newCatrl = async (event) => {
 export const getURL = async (event) => {
   let response: any = {
     statusCode: 0,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     body: '',
   };
 
@@ -136,6 +142,7 @@ export const getStatic = async (event) => {
     statusCode: 200,
     headers: {
       'Content-Type': 'text/html',
+      'Access-Control-Allow-Origin': '*',
     },
     body: html,
   };
