@@ -1,5 +1,3 @@
-('use strict');
-
 import { S3, DynamoDB } from 'aws-sdk';
 import adjectives from './adjectives';
 import felines from './felines';
