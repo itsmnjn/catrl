@@ -1,10 +1,13 @@
 ('use strict');
 
-import { DynamoDB } from 'aws-sdk';
+import { S3, DynamoDB } from 'aws-sdk';
 import adjectives from './adjectives';
 import felines from './felines';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const dynamoDB = new DynamoDB.DocumentClient();
+const s3 = new S3();
 
 const randStringFromList = (list: string[]): string => {
   const len = list.length;
@@ -126,5 +129,17 @@ export const getURL = async (event) => {
     console.error(error);
   }
 
+  return response;
+};
+
+export const getStatic = async (event) => {
+  const html = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
+  const response = {
+    statusCode: 200,
+    headers: {
+      'Content-Type': 'text/html',
+    },
+    body: html,
+  };
   return response;
 };
