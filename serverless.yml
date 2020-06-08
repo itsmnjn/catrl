@@ -48,3 +48,13 @@ functions:
             parameters:
               paths:
                 catrl: true
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: 'catrl.co'
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
