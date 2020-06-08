@@ -118,9 +118,8 @@ export const getURL = async (event) => {
 
     if (isObjEmpty(result)) {
       response.statusCode = 404;
-      response.body = JSON.stringify({ error: 'URL does not exist.' });
+      response.body = JSON.stringify({ error: 'Invalid catrl' });
     } else {
-      response.statusCode = 200;
       response.statusCode = 301;
       response.headers = {
         Location: result.Item.url,
