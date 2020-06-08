@@ -41,10 +41,10 @@ functions:
     handler: handler.getURL
     events:
       - http:
-          path: get
+          path: '{catrl}'
           method: get
           cors: true
           request:
             parameters:
-              querystrings:
+              paths:
                 catrl: true
