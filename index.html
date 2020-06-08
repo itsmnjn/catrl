@@ -93,13 +93,187 @@
       content="https://dqyky9girakpy.cloudfront.net/ms-icon-144x144.png"
     />
     <meta name="theme-color" content="#ffffff" />
+    <style>
+      html {
+        font-size: 14px;
+        height: 100%;
+      }
+
+      body {
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, 'Helvetica Neue', Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #3c3c3c;
+        padding: 0;
+        margin: 0;
+        min-height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #container {
+        padding-top: 4rem;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #form {
+        margin-bottom: 1.5rem;
+      }
+
+      input {
+        font-size: 1rem;
+        border: 1px solid #bcbcbc;
+        /* border-radius: 0.5rem; */
+        height: 2.2rem;
+        width: 14rem;
+        padding-left: 0.5rem;
+        margin: 0 0.3rem 0 0;
+      }
+
+      img {
+        display: block;
+        margin-bottom: 2.5rem;
+        max-width: 12rem;
+      }
+
+      button {
+        font-size: 1rem;
+        border: none;
+        /* border-radius: 0.5rem; */
+        background-color: #1c1c1c;
+        padding: 0.6rem 0.8rem;
+        color: #ececec;
+        margin: 0;
+      }
+
+      button:hover {
+        cursor: pointer;
+        background-color: #3c3c3c;
+      }
+
+      .error {
+        color: #eb3515;
+      }
+
+      .light-grey {
+        color: #8c8c8c;
+      }
+
+      a {
+        color: #3c3c3c;
+      }
+
+      p {
+        margin: 0 0 0.8rem;
+        padding: 0;
+        text-align: center;
+        line-height: 1.5rem;
+        max-width: 20rem;
+      }
+
+      footer {
+        font-size: 0.8rem;
+        padding-top: 1rem;
+        align-self: center;
+        padding-bottom: 0.1rem;
+      }
+    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-112603320-5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-112603320-5');
+    </script>
   </head>
   <body>
-    <h1>CATRL</h1>
-    <image
-      src="https://dqyky9girakpy.cloudfront.net/media.jpg"
-      width="200"
-      alt="Cat"
-    />
+    <div id="container">
+      <image
+        src="https://dqyky9girakpy.cloudfront.net/cat.png"
+        width="200"
+        alt="Cat"
+      />
+      <div id="form">
+        <input
+          type="text"
+          placeholder="https://verylongurl.com"
+          id="url"
+          onsubmit="submit()"
+        />
+        <button onclick="submit()">Meow!</button>
+      </div>
+      <!-- <p>Purring...</p>
+      <p>
+        <span class="light-grey">https://app.slack....</span> ->
+        https://catrl.co/earthyabsorbingcougar
+      </p> -->
+    </div>
+    <footer>
+      <p class="light-grey">
+        Made with ♥ by
+        <a class="light-grey" target="_blank" href="https://mnjn.me">MNJN</a>
+      </p>
+    </footer>
+
+    <script type="text/javascript">
+      var input = document.getElementById('url');
+
+      input.addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+          submit();
+        }
+      });
+
+      function submit() {
+        var container = document.getElementById('container');
+
+        var output = document.createElement('p');
+        output.innerHTML = 'Purring...';
+
+        container.appendChild(output);
+
+        var url = input.value;
+
+        fetch('https://catrl.co/new?url=' + url)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (result) {
+            if (result.error) {
+              output.classList.add('error');
+              output.innerHTML = result.error;
+            } else {
+              var maxLen = 18;
+              var catrl = result.result;
+              // if (url.length > maxLen) url = url.substring(0, maxLen) + '...';
+              output.innerHTML =
+                '' +
+                url +
+                ' -> <a target="_blank" href="https://catrl.co/' +
+                catrl +
+                '">https://catrl.co/' +
+                catrl +
+                '</a>';
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+
+        input.value = '';
+      }
+    </script>
   </body>
 </html>
