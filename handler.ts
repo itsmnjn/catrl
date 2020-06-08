@@ -43,7 +43,7 @@ export const newCatrl = async (event) => {
     event.queryStringParameters.url === ''
   ) {
     response.statusCode = 500;
-    response.body = JSON.stringify({ error: 'No URL passed.' });
+    response.body = JSON.stringify({ error: 'Invalid URL.' });
     return response;
   }
 
@@ -51,7 +51,7 @@ export const newCatrl = async (event) => {
 
   if (!urlRegExp.test(event.queryStringParameters.url)) {
     response.statusCode = 500;
-    response.body = JSON.stringify({ error: 'Invalid URL passed' });
+    response.body = JSON.stringify({ error: 'Invalid URL.' });
     return response;
   }
 
