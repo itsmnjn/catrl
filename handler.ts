@@ -97,15 +97,6 @@ export const getURL = async (event) => {
     body: '',
   };
 
-  if (
-    !event.queryStringParameters ||
-    !event.queryStringParameters.catrl ||
-    event.queryStringParameters.catrl === ''
-  ) {
-    response.statusCode = 500;
-    response.body = JSON.stringify({ error: 'No catrl passed.' });
-    return response;
-  }
   let params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
