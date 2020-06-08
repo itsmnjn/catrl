@@ -92,7 +92,7 @@ export const newCatrl = async (event) => {
 };
 
 export const getURL = async (event) => {
-  let response = {
+  let response: any = {
     statusCode: 0,
     body: '',
   };
