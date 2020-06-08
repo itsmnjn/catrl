@@ -120,6 +120,7 @@ export const getURL = async (event) => {
     } else {
       response.statusCode = 301;
       response.headers = {
+        ...response.headers,
         Location: result.Item.url,
       };
       response.body = JSON.stringify({
